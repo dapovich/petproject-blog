@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "personal-blog"
+version = "0.1.0"
+description = ""
+authors = ["dap0vich <d4nil.pichugin@yandex.ru>"]
+readme = "README.md"
+packages = [{include = "personal_blog"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+django = "^4.2.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
