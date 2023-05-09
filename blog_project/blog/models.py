@@ -3,6 +3,13 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 
 
+# Custom publish manager to retrive posts with PUBLISHED status.
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset()\
+                      .filter(status=Post.Status.PUBLISHED)
+
+
 class Post(models.Model):
 
     class Status(models.TextChoices):
@@ -24,6 +31,9 @@ class Post(models.Model):
 
     class Meta:
         ordering = ['-publish']
+
+    objects = models.Manager()      # The default manager.
+    published = PublishedManager()  # The custom manager.
 
     def __str__(self):
         return self.title
