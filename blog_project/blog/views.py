@@ -9,10 +9,17 @@ def post_list(request):
                   {'posts': posts})
 
 
-def post_detail(request, id):
+def post_detail(request, year, month, day, post):
+    # Queries with field lookup methods are built using two underscores.
+    # It also could be used for accessing fields of related models.
+    # Here we use two underscores to access fields year, month and day of
+    # the publish record
     post = get_object_or_404(Post,
-                             id=id,
-                             status=Post.Status.PUBLISHED)
+                             status=Post.Status.PUBLISHED,
+                             slug=post,
+                             publish__year=year,
+                             publish__month=month,
+                             publish__day=day)
 
     return render(request,
                   'blog/post/detail.html',
